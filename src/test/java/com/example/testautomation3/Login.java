@@ -6,6 +6,8 @@
 package com.example.testautomation3;
 
 import java.time.Duration;
+
+import org.apache.hc.core5.util.TimeValue;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,6 +18,11 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class Login {
     private final WebDriver driver = new ChromeDriver();
@@ -44,7 +51,7 @@ public class Login {
         this.utils.waitUntilElementFound(By.id("header-details-user-fullname")).click();
         this.utils.waitUntilElementFound(By.id("view_profile")).click();
         WebElement username = this.utils.waitUntilElementFound(By.id("up-d-username"));
-        Assertions.assertEquals("automation43", username.getAttribute("innerText"));
+        Assertions.assertEquals(Utils.readCsv("SuccessfulLoginData.csv").get(0)[0], username.getAttribute("innerText"));
         this.utils.logout();
     }
 
